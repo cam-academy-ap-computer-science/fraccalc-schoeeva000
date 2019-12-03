@@ -1,3 +1,29 @@
+/* PSUDOCODE
+ * 
+ * IN MAIN
+ * get input from user
+ * pass it to a method which does the calculations (simple!)
+ * output that answer to the console
+ * 
+ * IN PRODUCE ANSWER
+ * split the input by the operator(s) and put parts into strings
+ * do this for each part, based on number of parts
+ * 		split the parts (mixed numbers) into whole number, numerator, and denominator
+ * 		take the numerator divided by denominator and add to the whole number (if fraction is improper)
+ * 		make the fraction proper by making the numerator modulo denominator the new numerator
+ * find the greatest common denominator by calling a method gcm, and make the denominators equal to that denom
+ * 
+ * 
+ * 
+ * call a method GCD to figure out the greatest common denominator for the num and denom
+ * use this to simplify fraction, by dividing num and denom by the GCD
+ * 
+ * IN GCD
+ * find the gcd! (see below)
+ * 
+ */
+
+
 package fracCalc;
 
 public class FracCalc {
@@ -22,7 +48,15 @@ public class FracCalc {
         
         return "";
     }
+    
+ // TODO: Fill in the space below with any helper methods that you think you will need
+    
+    public static int gcd(int a, int b) {
+    	if (b == 0) {
+    		return a;
+    	}
+    	return Math.abs(gcd(b, a%b));
+    }
 
-    // TODO: Fill in the space below with any helper methods that you think you will need
     
 }
