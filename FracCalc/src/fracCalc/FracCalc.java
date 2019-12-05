@@ -7,30 +7,47 @@
  * 
  * IN PRODUCE ANSWER
  * split the input by the operator(s) and put parts into strings
- * do this for each part, based on number of parts
+ * 		find the operator by scanning for spaces on each side of the operator (to distinguish it from a fraction)
+ * 		put operators into a char array
+ * 		count the number of values in question and make a string array of that size,
+ * 		input the mixed numbers into it
+ * 
+ * make an array of the same size for the numerators, and another for the denoms
+ * 
+ * do this for each part, till all parts are used up
  * 		split the parts (mixed numbers) into whole number, numerator, and denominator
- * 		take the numerator divided by denominator and add to the whole number (if fraction is improper)
- * 		make the fraction proper by making the numerator modulo denominator the new numerator
- * find the greatest common denominator by calling a method gcm, and make the denominators equal to that denom
+ *		save these into their respective arrays (if no fraction, put 0)
+ * find the greatest common denominator by calling a method gcm, passing in the array of denominators
+ * change each fraction accordingly, based on gcm's return value
+ * do calculations on whole numbers
+ * add all numerators, and make the fraction proper by dividing by the (now common) denom, adding result to whole number and num % denom for the new num
+ * 
+ * output the result!
  * 
  * 
  * 
- * call a method GCD to figure out the greatest common denominator for the num and denom
- * use this to simplify fraction, by dividing num and denom by the GCD
+ * IN GCM
  * 
- * IN GCD
- * find the gcd! (see below)
  * 
  */
 
 
 package fracCalc;
+import java.util.Scanner;
 
 public class FracCalc {
 
     public static void main(String[] args) 
     {
         // TODO: Read the input from the user and call produceAnswer with an equation
+    	Scanner userJunk = new Scanner(System.in);
+    	System.out.println("Enter equation to calculate, or type \"quit\" to quit.");
+    	System.out.println("Seperate fractions with \"/\", whole numbers from fractions with \"_\", and numbers from operators with a space.");
+    	String initialInput = userJunk.nextLine();
+    	
+    	while (initialInput.toLowerCase() != "quit") {  //if the user didn't want to quit, go on with the calculator
+    		System.out.println(produceAnswer(initialInput)); // print the answer!
+    	}
 
     }
     
