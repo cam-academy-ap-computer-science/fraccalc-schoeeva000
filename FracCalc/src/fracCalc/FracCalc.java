@@ -41,14 +41,16 @@ public class FracCalc {
     {
         // TODO: Read the input from the user and call produceAnswer with an equation
     	Scanner userJunk = new Scanner(System.in);
-    	System.out.println("Enter equation to calculate, or type \"quit\" to quit.");
-    	System.out.println("Seperate fractions with \"/\", whole numbers from fractions with \"_\", and numbers from operators with a space.");
-    	String initialInput = userJunk.nextLine();
-    	
-    	while (initialInput.toLowerCase() != "quit") {  //if the user didn't want to quit, go on with the calculator
+    	String initialInput = "";
+    	while (!initialInput.toLowerCase().equals("quit")) {  //if the user didn't want to quit, go on with the calculator
+    		System.out.println("Enter equation to calculate, or type \"quit\" to quit.");
+        	System.out.println("Seperate fractions with \"/\", whole numbers from fractions with \"_\", and numbers from operators with a space.");
+        	initialInput = userJunk.nextLine();
     		System.out.println(produceAnswer(initialInput)); // print the answer!
     	}
-
+    	
+    	System.out.println("Goodbye!");
+    	
     }
     
     // ** IMPORTANT ** DO NOT DELETE THIS FUNCTION.  This function will be used to test your code
@@ -62,18 +64,36 @@ public class FracCalc {
     public static String produceAnswer(String input)
     { 
         // TODO: Implement this function to produce the solution to the input
+    	int numberOfValues = 1;
+    	String cutInput = input;
+    	while (cutInput.indexOf(' ') != -1) { //finds the length of the whole string by searching for operators
+    		cutInput = cutInput.substring(cutInput.indexOf(' ') + 3, cutInput.length() - 1); //cut out a smaller string to search next time
+    		numberOfValues++;
+    		System.out.println(numberOfValues);
+    	}
+    	
         
         return "";
-    }
+        
+     /*   
+     public static int gcd(int a, int b) {
+       if (b == 0) {
+        	return a;
+       	}
+        return Math.abs(gcd(b, a%b));
+     } */
+
     
  // TODO: Fill in the space below with any helper methods that you think you will need
-    
+    /*
     public static int gcd(int a, int b) {
     	if (b == 0) {
     		return a;
     	}
     	return Math.abs(gcd(b, a%b));
     }
+    */
+}}
 
     
-}
+
