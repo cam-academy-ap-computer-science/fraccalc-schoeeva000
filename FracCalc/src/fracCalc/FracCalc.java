@@ -47,7 +47,9 @@ public class FracCalc {
 			System.out.println(
 					"Seperate fractions with \"/\", whole numbers from fractions with \"_\", and numbers from operators with a space.");
 			initialInput = userJunk.nextLine();
+			if(!initialInput.toLowerCase().equals("quit")) {
 			System.out.println(produceAnswer(initialInput)); // print the answer!
+			}
 		}
 
 		System.out.println("Goodbye!");
@@ -71,23 +73,33 @@ public class FracCalc {
     	int numberOfValues = 1;
     	String cutInput = input;
     	while (cutInput.indexOf(' ') != -1) { //finds the length of the whole string by searching for operators
-    		cutInput = cutInput.substring(cutInput.indexOf(' ') + 3, cutInput.length() - 1); //cut out a smaller string to search next time
+    		cutInput = cutInput.substring(cutInput.indexOf(' ') + 3, cutInput.length()); //cut out a smaller string to search next time
     		numberOfValues++;
     	}
     	
     	int wholeNumbers[] = new int[numberOfValues];
     	int numerators[] = new int[numberOfValues];
     	int denominators[] = new int[numberOfValues];
+    	char operators[] = new char[numberOfValues - 1];
+    	
+    	
+    	//  1_2/3 + 44_54/64 + 7_8/9 + 10_11/12
     	
     	cutInput = input;
     	while (cutInput.length() > 0) {
-    		String whole = cutInput.substring(0, cutInput.indexOf('_'));
-    		String num = cutInput.substring(cutInput.indexOf('_'), cutInput.indexOf('/'));
-    		String denom = cutInput.substring(cutInput.indexOf('/'), cutInput.indexOf('/') + 2);
-    		cutInput = "";
-    		System.out.println(cutInput + " " + num);
-    		System.out.println(denom);
-    		System.out.println(whole);
+    		String numberInQuestion = cutInput.substring(0, cutInput.indexOf(' ') + 3); //make a small string with one mixed number including the operator after it
+    		
+    		String whole = numberInQuestion.substring(0, numberInQuestion.indexOf('_'));
+    		String num = numberInQuestion.substring(numberInQuestion.indexOf('_') + 1, numberInQuestion.indexOf('/'));
+    		String denom = numberInQuestion.substring(numberInQuestion.indexOf('/') + 1, numberInQuestion.indexOf(' '));
+    		
+    		cutInput = cutInput.substring(cutInput.indexOf(' ') + 3, cutInput.length()); //cut the string down, make shorter
+    		
+    		System.out.println(cutInput);
+    		System.out.println("whole = " + whole);
+    		System.out.println("num = " + num);
+    		System.out.println("denom = " + denom);
+    		System.out.println();
     	}
     	return "";
     	
