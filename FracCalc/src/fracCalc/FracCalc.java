@@ -92,13 +92,16 @@ public class FracCalc {
     		String whole = numberInQuestion.substring(0, numberInQuestion.indexOf('_'));
     		String num = numberInQuestion.substring(numberInQuestion.indexOf('_') + 1, numberInQuestion.indexOf('/'));
     		String denom = numberInQuestion.substring(numberInQuestion.indexOf('/') + 1, numberInQuestion.indexOf(' '));
+    		char operator = numberInQuestion.charAt(numberInQuestion.length() - 2);
     		
     		cutInput = cutInput.substring(cutInput.indexOf(' ') + 3, cutInput.length()); //cut the string down, make shorter
     		
-    		System.out.println(cutInput);
+    		System.out.println(numberInQuestion);
     		System.out.println("whole = " + whole);
     		System.out.println("num = " + num);
     		System.out.println("denom = " + denom);
+    		System.out.println("operator = " + operator);
+    		System.out.println("Remaining String = " + cutInput);
     		System.out.println();
     	}
     	return "";
