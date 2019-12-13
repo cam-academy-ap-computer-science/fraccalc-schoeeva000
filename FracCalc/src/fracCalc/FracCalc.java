@@ -86,15 +86,37 @@ public class FracCalc {
     	//  1_2/3 + 44_54/64 + 7_8/9 + 10_11/12
     	
     	cutInput = input;
+    	String numberInQuestion = "";
+    	int arrayPosition = 0;
     	while (cutInput.length() > 0) {
-    		String numberInQuestion = cutInput.substring(0, cutInput.indexOf(' ') + 3); //make a small string with one mixed number including the operator after it
     		
-    		String whole = numberInQuestion.substring(0, numberInQuestion.indexOf('_'));
-    		String num = numberInQuestion.substring(numberInQuestion.indexOf('_') + 1, numberInQuestion.indexOf('/'));
-    		String denom = numberInQuestion.substring(numberInQuestion.indexOf('/') + 1, numberInQuestion.indexOf(' '));
-    		char operator = numberInQuestion.charAt(numberInQuestion.length() - 2);
+    		if(cutInput.indexOf(' ') != -1) {
+    		numberInQuestion = cutInput.substring(0, cutInput.indexOf(' ') + 3); //make a small string with one mixed number including the operator after it
+    		} else {
+    			numberInQuestion = cutInput;
+    			cutInput = "";
+    		}
     		
-    		cutInput = cutInput.substring(cutInput.indexOf(' ') + 3, cutInput.length()); //cut the string down, make shorter
+    		String denom;
+    		String whole;
+    		String num;
+    		char operator;
+    		whole = numberInQuestion.substring(0, numberInQuestion.indexOf('_'));
+    		num = numberInQuestion.substring(numberInQuestion.indexOf('_') + 1, numberInQuestion.indexOf('/'));
+    		if (cutInput.indexOf(' ') != -1) {
+    			denom = numberInQuestion.substring(numberInQuestion.indexOf('/') + 1, numberInQuestion.indexOf(' '));
+    			cutInput = cutInput.substring(cutInput.indexOf(' ') + 3, cutInput.length());
+    			operator = numberInQuestion.charAt(numberInQuestion.length() - 2);
+    		} else {
+    			denom = numberInQuestion.substring(numberInQuestion.indexOf('/') + 1, numberInQuestion.length());
+    			operator = 'n';
+    		}
+    		
+    		// now put all the gathered values into their respective arrays
+    		
+    		
+    		arrayPosition++;
+    		//cut the string down, make shorter
     		
     		System.out.println(numberInQuestion);
     		System.out.println("whole = " + whole);
@@ -104,6 +126,7 @@ public class FracCalc {
     		System.out.println("Remaining String = " + cutInput);
     		System.out.println();
     	}
+    		
     	return "";
     	
 
@@ -127,3 +150,4 @@ public class FracCalc {
     */
 }
 }
+
