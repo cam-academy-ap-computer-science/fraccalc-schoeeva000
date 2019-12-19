@@ -145,7 +145,7 @@ public class FracCalc {
     	
     	
     	
-    	return "";
+    	return "whole:" + wholeNumbers[wholeNumbers.length] + " numorators:" + ;
     	
 
       /*
