@@ -33,6 +33,7 @@
 
 package fracCalc;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class FracCalc {
@@ -80,9 +81,8 @@ public class FracCalc {
     	int wholeNumbers[] = new int[numberOfValues];
     	int numerators[] = new int[numberOfValues];
     	int denominators[] = new int[numberOfValues];
-    	char operators[] = new char[numberOfValues - 1];
-    	
-    	
+    	char operators[] = new char[numberOfValues];
+    	    	
     	//  1_2/3 + 44_54/64 + 7_8/9 + 10_11/12
     	
     	cutInput = input;
@@ -97,36 +97,54 @@ public class FracCalc {
     			cutInput = "";
     		}
     		
+    		System.out.println("Number in question = " + numberInQuestion);
+    		
     		String denom;
     		String whole;
     		String num;
-    		char operator;
-    		whole = numberInQuestion.substring(0, numberInQuestion.indexOf('_'));
-    		num = numberInQuestion.substring(numberInQuestion.indexOf('_') + 1, numberInQuestion.indexOf('/'));
-    		if (cutInput.indexOf(' ') != -1) {
-    			denom = numberInQuestion.substring(numberInQuestion.indexOf('/') + 1, numberInQuestion.indexOf(' '));
-    			cutInput = cutInput.substring(cutInput.indexOf(' ') + 3, cutInput.length());
-    			operator = numberInQuestion.charAt(numberInQuestion.length() - 2);
-    		} else {
-    			denom = numberInQuestion.substring(numberInQuestion.indexOf('/') + 1, numberInQuestion.length());
-    			operator = 'n';
+    		char operator = 'n';
+    		
+    		if (numberInQuestion.indexOf('_') == -1) {
+    			whole = numberInQuestion.substring(0, numberInQuestion.indexOf(' '));
+    			num = "0";
+    			denom = "1"; // This excecutes if there is only a whole number, no fraction
+    		} else { 
+    			whole = numberInQuestion.substring(0, numberInQuestion.indexOf('_'));
+    			num = numberInQuestion.substring(numberInQuestion.indexOf('_') + 1, numberInQuestion.indexOf('/'));
+        		if (numberInQuestion.indexOf(' ') != -1) {
+        			denom = numberInQuestion.substring(numberInQuestion.indexOf('/') + 1, numberInQuestion.indexOf(' '));
+        			cutInput = cutInput.substring(cutInput.indexOf(' ') + 3, cutInput.length());
+        			operator = numberInQuestion.charAt(numberInQuestion.length() - 2);
+        		} else {
+        			denom = numberInQuestion.substring(numberInQuestion.indexOf('/') + 1, numberInQuestion.length());
+        			operator = 'n';
+        		}
     		}
     		
     		// now put all the gathered values into their respective arrays
-    		
-    		
+    		denominators[arrayPosition] = Integer.parseInt(denom);
+    		numerators[arrayPosition] = Integer.parseInt(num);
+    		wholeNumbers[arrayPosition] = Integer.parseInt(whole);
+    		operators[arrayPosition] = operator;
+
     		arrayPosition++;
-    		//cut the string down, make shorter
     		
-    		System.out.println(numberInQuestion);
     		System.out.println("whole = " + whole);
     		System.out.println("num = " + num);
     		System.out.println("denom = " + denom);
     		System.out.println("operator = " + operator);
     		System.out.println("Remaining String = " + cutInput);
     		System.out.println();
+    		System.out.println(Arrays.toString(wholeNumbers));
+    		System.out.println(Arrays.toString(numerators));
+    		System.out.println(Arrays.toString(denominators));
+    		System.out.println(Arrays.toString(operators));
+    		System.out.println("=======================");
     	}
-    		
+    	
+    	
+    	
+    	
     	return "";
     	
 
