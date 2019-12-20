@@ -97,18 +97,27 @@ public class FracCalc {
     			cutInput = "";
     		}
     		
-    		System.out.println("Number in question = " + numberInQuestion);
+    		// System.out.println("Number in question = " + numberInQuestion);
     		
     		String denom;
     		String whole;
     		String num;
     		char operator = 'n';
     		
-    		if (numberInQuestion.indexOf('_') == -1) {
+    		if (numberInQuestion.indexOf('_') == -1 && numberInQuestion.indexOf('/') == -1) { // if test should be changed later, in order not to scan for a dividing operator
     			whole = numberInQuestion.substring(0, numberInQuestion.indexOf(' '));
     			num = "0";
     			denom = "1"; // This excecutes if there is only a whole number, no fraction
-    		} else { 
+    		} else if (numberInQuestion.indexOf('_') == -1 && !(numberInQuestion.indexOf('/') == -1)) { // this executes if there is only a fraction
+    			whole = "0";
+    			num = numberInQuestion.substring(0, numberInQuestion.indexOf('/'));
+    			denom = numberInQuestion.substring(numberInQuestion.indexOf('/') + 1, numberInQuestion.indexOf(' '));
+    			operator = numberInQuestion.charAt(numberInQuestion.length() - 2);
+    			System.out.println(whole);
+    			System.out.println(num);
+    			System.out.println(denom);
+    			
+    		} else {
     			whole = numberInQuestion.substring(0, numberInQuestion.indexOf('_'));
     			num = numberInQuestion.substring(numberInQuestion.indexOf('_') + 1, numberInQuestion.indexOf('/'));
         		if (numberInQuestion.indexOf(' ') != -1) {
@@ -140,12 +149,16 @@ public class FracCalc {
     		System.out.println(Arrays.toString(denominators));
     		System.out.println(Arrays.toString(operators));
     		System.out.println("=======================");
+    		
+    		//CUT CUTINPUT DOWN
+    		cutInput = cutInput.substring(numberInQuestion.length(), cutInput.length());
+    		
     	}
     	
     	
     	
-    	
-    	return "whole:" + wholeNumbers[wholeNumbers.length] + " numorators:" + ;
+    	System.out.println("whole:" + wholeNumbers[wholeNumbers.length - 1] + " numerator:" + numerators[wholeNumbers.length - 1] + " denominator:" + denominators[denominators.length - 1]);
+    	return "whole:" + wholeNumbers[wholeNumbers.length - 1] + " numerator:" + numerators[wholeNumbers.length - 1] + " denominator:" + denominators[denominators.length - 1];
     	
 
       /*
