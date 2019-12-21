@@ -1,4 +1,9 @@
-/* PSUDOCODE
+/* 
+ * 
+ * CHECKPOINTS 1 & 2 are DONE
+ * 
+ * 
+ * PPSUDOCODE
  * 
  * IN MAIN
  * get input from user
@@ -80,28 +85,102 @@ public class FracCalc {
     	int wholeNumbers[] = new int[2];
     	int numerators[] = new int[2];
     	int denominators[] = new int[2];
-    	char operators[] = new char[1];
+    	char operator;
     	cutInput = input;
     	String numberInQuestion = "";
-    	int arrayPosition = 0;
     	
     	//////////////////////////////////////////////////////////////
-    	while (cutInput.length() > 0) {
+    	
     		
     		numberInQuestion = cutInput.substring(0, cutInput.indexOf(' ') + 3);
     		
-    		System.out.println(numberInQuestion);
+    		
+    		if (numberInQuestion.indexOf('_') == -1) {
+    			if (numberInQuestion.indexOf('/') != -1) {  // the number is a FRACTION, change later to account for dividing operators
+    				numerators[0] = Integer.parseInt(numberInQuestion.substring(0, numberInQuestion.indexOf('/'))); // put the numerator into the array
+    				denominators[0] = Integer.parseInt(numberInQuestion.substring(numberInQuestion.indexOf('/') + 1, numberInQuestion.indexOf(' '))); // find the denominator and put it into the array
+    				wholeNumbers[0] = 0;
+    			} else {					// or else, the number is a WHOLE NUMBER
+    				numerators[0] = 0;
+    				denominators[0] = 1;
+    				wholeNumbers[0] = Integer.parseInt(numberInQuestion.substring(0, numberInQuestion.indexOf(' ')));
+    			}
+    		} else { // the number is a regular MIXED NUMBER
+    			wholeNumbers[0] = Integer.parseInt(numberInQuestion.substring(0, numberInQuestion.indexOf('_')));
+    			numerators[0] = Integer.parseInt(numberInQuestion.substring(numberInQuestion.indexOf('_') + 1, numberInQuestion.indexOf('/')));
+    			denominators[0] = Integer.parseInt(numberInQuestion.substring(numberInQuestion.indexOf('/') + 1, numberInQuestion.indexOf(' ')));
+    		}
+    		operator = numberInQuestion.charAt(numberInQuestion.indexOf(' ') + 1); // finally, find the operator
+    		/*
+    		System.out.println("whole: " + wholeNumbers[0]);
+    		System.out.println("num: " + numerators[0]);
+    		System.out.println("denom: " + denominators[0]);
+    		System.out.println("operator: " + operator);
+    		*/
+    		// MAKE A NEW NUMBER TO WORK WITH
+    		numberInQuestion = cutInput.substring(cutInput.indexOf(' ') + 3, cutInput.length());
+    		
+    		
+    		if (numberInQuestion.indexOf('_') == -1) {
+    			if (numberInQuestion.indexOf('/') != -1) {  // the number is a FRACTION, change later to account for dividing operators
+    				numerators[1] = Integer.parseInt(numberInQuestion.substring(0, numberInQuestion.indexOf('/'))); // put the numerator into the array
+    				denominators[1] = Integer.parseInt(numberInQuestion.substring(numberInQuestion.indexOf('/') + 1, numberInQuestion.length())); // find the denominator and put it into the array
+    				wholeNumbers[1] = 0;
+    			} else {					// or else, the number is a WHOLE NUMBER
+    				numerators[1] = 0;
+    				denominators[1] = 1;
+    				wholeNumbers[1] = Integer.parseInt(numberInQuestion.substring(0, numberInQuestion.length()));
+    			}
+    		} else { // the number is a regular MIXED NUMBER
+    			wholeNumbers[1] = Integer.parseInt(numberInQuestion.substring(0, numberInQuestion.indexOf('_')));
+    			numerators[1] = Integer.parseInt(numberInQuestion.substring(numberInQuestion.indexOf('_') + 1, numberInQuestion.indexOf('/')));
+    			denominators[1] = Integer.parseInt(numberInQuestion.substring(numberInQuestion.indexOf('/') + 1, numberInQuestion.length()));
+    		}
+    		
+    		/*
+    		System.out.println("whole: " + wholeNumbers[1]);
+    		System.out.println("num: " + numerators[1]);
+    		System.out.println("denom: " + denominators[1]);
+    		System.out.println("operator: " + operator);
+    		
+    		//5_3/4 + 6_5/8
+    		
+    		
+    		// NOW FOR CALCULATIONS
+    		*/
+    		
+    		int resultNumorator = 0;
+    		int resultDenominator = 0;
+    		if (operator == '+') {
+    			
+    			int leastCommonMultiple = lcm(denominators[0], denominators[1]);
+    			resultDenominator = leastCommonMultiple;
+    			for (int i = 0; i <= 1; i++) {
+    			numerators[i] += (wholeNumbers[i] * denominators[i]); // multiply the whole number by the denom and add to numorator, creating an improper fraction
+    			numerators[i] *= (leastCommonMultiple / denominators[i]); // multiply the numorators by the amount of times it's denom goes into both denoms' lcm
+    			System.out.println("num = " + numerators[i]);
+    			}
+    			resultNumorator = numerators[0] + numerators[1];
+    			
+    			
+    		} else if (operator == '-') {
+    			int leastCommonMultiple = lcm(denominators[0], denominators[1]);
+    			resultDenominator = leastCommonMultiple;
+    			for (int i = 0; i <= 1; i++) {
+    			numerators[i] += (wholeNumbers[i] * denominators[i]); // multiply the whole number by the denom and add to numorator, creating an improper fraction
+    			numerators[i] *= (leastCommonMultiple / denominators[i]); // multiply the numorators by the amount of times it's denom goes into both denoms' lcm
+    			System.out.println("num = " + numerators[i]);
+    			}
+    			resultNumorator = numerators[0] - numerators[1];
+    		}
     		
     		
     		
     		
     		
     		
-    		
-    		
-    		
-    		
-/*    		
+/*    		RE-DID CODE, THIS IS WAY TO CONFUSING
+ * 
     		if(cutInput.indexOf(' ') != -1) {
     		numberInQuestion = cutInput.substring(0, cutInput.indexOf(' ') + 3); //make a small string with one mixed number including the operator after it
    		} else {
@@ -205,7 +284,23 @@ public class FracCalc {
      
     	
     */	
+
+		return resultNumorator + "/" + resultDenominator;
+	}
+	public static int lcm(int number1, int number2) {
+	    if (number1 == 0 || number2 == 0) {
+	        return 0;
+	    }
+	    int absNumber1 = Math.abs(number1);
+	    int absNumber2 = Math.abs(number2);
+	    int absHigherNumber = Math.max(absNumber1, absNumber2);
+	    int absLowerNumber = Math.min(absNumber1, absNumber2);
+	    int lcm = absHigherNumber;
+	    while (lcm % absLowerNumber != 0) {
+	        lcm += absHigherNumber;
+	    }
+	    return lcm;
+	}	
+
 }
-		return "";
-	}}
 
