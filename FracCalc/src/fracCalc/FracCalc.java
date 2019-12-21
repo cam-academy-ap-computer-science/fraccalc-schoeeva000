@@ -29,7 +29,7 @@
  * IN GCM
  * 
  * 
- */
+  */
 
 package fracCalc;
 
@@ -71,31 +71,43 @@ public class FracCalc {
 	public static String produceAnswer(String input) { 
         // TODO: Implement this function to produce the solution to the input
     	
-    	int numberOfValues = 1;
     	String cutInput = input;
-    	while (cutInput.indexOf(' ') != -1) { //finds the length of the whole string by searching for operators
-    		cutInput = cutInput.substring(cutInput.indexOf(' ') + 3, cutInput.length()); //cut out a smaller string to search next time
-    		numberOfValues++;
-    	}
     	
-    	int wholeNumbers[] = new int[numberOfValues];
-    	int numerators[] = new int[numberOfValues];
-    	int denominators[] = new int[numberOfValues];
-    	char operators[] = new char[numberOfValues];
-    	    	
-    	//  1_2/3 + 44_54/64 + 7_8/9 + 10_11/12
     	
+    	///////////////////////////////////////////////////////////////
+    	
+    	
+    	int wholeNumbers[] = new int[2];
+    	int numerators[] = new int[2];
+    	int denominators[] = new int[2];
+    	char operators[] = new char[1];
     	cutInput = input;
     	String numberInQuestion = "";
     	int arrayPosition = 0;
+    	
+    	//////////////////////////////////////////////////////////////
     	while (cutInput.length() > 0) {
     		
+    		numberInQuestion = cutInput.substring(0, cutInput.indexOf(' ') + 3);
+    		
+    		System.out.println(numberInQuestion);
+    		
+    		
+    		
+    		
+    		
+    		
+    		
+    		
+    		
+    		
+/*    		
     		if(cutInput.indexOf(' ') != -1) {
     		numberInQuestion = cutInput.substring(0, cutInput.indexOf(' ') + 3); //make a small string with one mixed number including the operator after it
-    		} else {
+   		} else {
     			numberInQuestion = cutInput;
     			cutInput = "";
-    		}
+  		}
     		
     		// System.out.println("Number in question = " + numberInQuestion);
     		
@@ -103,19 +115,23 @@ public class FracCalc {
     		String whole;
     		String num;
     		char operator = 'n';
-    		
+  
     		if (numberInQuestion.indexOf('_') == -1 && numberInQuestion.indexOf('/') == -1) { // if test should be changed later, in order not to scan for a dividing operator
-    			whole = numberInQuestion.substring(0, numberInQuestion.indexOf(' '));
+    			whole = numberInQuestion.substring(0, numberInQuestion.length());
     			num = "0";
     			denom = "1"; // This excecutes if there is only a whole number, no fraction
+    			System.out.println("only whole number");
     		} else if (numberInQuestion.indexOf('_') == -1 && !(numberInQuestion.indexOf('/') == -1)) { // this executes if there is only a fraction
     			whole = "0";
     			num = numberInQuestion.substring(0, numberInQuestion.indexOf('/'));
     			denom = numberInQuestion.substring(numberInQuestion.indexOf('/') + 1, numberInQuestion.indexOf(' '));
     			operator = numberInQuestion.charAt(numberInQuestion.length() - 2);
+    			System.out.println("only fraction");
+    			
     			System.out.println(whole);
     			System.out.println(num);
     			System.out.println(denom);
+    			
     			
     		} else {
     			whole = numberInQuestion.substring(0, numberInQuestion.indexOf('_'));
@@ -142,26 +158,34 @@ public class FracCalc {
     		System.out.println("num = " + num);
     		System.out.println("denom = " + denom);
     		System.out.println("operator = " + operator);
-    		System.out.println("Remaining String = " + cutInput);
+
     		System.out.println();
     		System.out.println(Arrays.toString(wholeNumbers));
     		System.out.println(Arrays.toString(numerators));
     		System.out.println(Arrays.toString(denominators));
     		System.out.println(Arrays.toString(operators));
+    		System.out.println("Remaining string = " + cutInput);
+    		System.out.println("num in question = " + numberInQuestion);
+    		System.out.println(numberInQuestion.charAt(numberInQuestion.length() - 1));
     		System.out.println("=======================");
     		
-    		//CUT CUTINPUT DOWN
-    		cutInput = cutInput.substring(numberInQuestion.length(), cutInput.length());
+    		
+    		//CUT DOWN CUTINPUT
+    		if (numberInQuestion.indexOf(' ') != -1) {
+    			cutInput = cutInput.substring(numberInQuestion.length(), cutInput.length() - 1);
+    		} else {
+    			cutInput = "";
+    		}
     		
     	}
-    	
+    	//////////////////////////////////////////////////////////////
     	
     	
     	System.out.println("whole:" + wholeNumbers[wholeNumbers.length - 1] + " numerator:" + numerators[wholeNumbers.length - 1] + " denominator:" + denominators[denominators.length - 1]);
     	return "whole:" + wholeNumbers[wholeNumbers.length - 1] + " numerator:" + numerators[wholeNumbers.length - 1] + " denominator:" + denominators[denominators.length - 1];
-    	
+    	 
 
-      /*
+       
      public static int gcd(int a, int b) {
        if (b == 0) {
         	return a;
@@ -178,7 +202,10 @@ public class FracCalc {
     	}
     	return Math.abs(gcd(b, a%b));
     }
-    */
+     
+    	
+    */	
 }
-}
+		return "";
+	}}
 
