@@ -111,12 +111,8 @@ public class FracCalc {
     			denominators[0] = Integer.parseInt(numberInQuestion.substring(numberInQuestion.indexOf('/') + 1, numberInQuestion.indexOf(' ')));
     		}
     		operator = numberInQuestion.charAt(numberInQuestion.indexOf(' ') + 1); // finally, find the operator
-    		/*
-    		System.out.println("whole: " + wholeNumbers[0]);
-    		System.out.println("num: " + numerators[0]);
-    		System.out.println("denom: " + denominators[0]);
-    		System.out.println("operator: " + operator);
-    		*/
+
+    		
     		// MAKE A NEW NUMBER TO WORK WITH
     		numberInQuestion = cutInput.substring(cutInput.indexOf(' ') + 3, cutInput.length());
     		
@@ -137,6 +133,17 @@ public class FracCalc {
     			denominators[1] = Integer.parseInt(numberInQuestion.substring(numberInQuestion.indexOf('/') + 1, numberInQuestion.length()));
     		}
     		
+    		// if the whole is negative, than make the numerator negative also
+    		for (int i = 0; i <= 1; i++) {
+    			if (wholeNumbers[i] < 0) {
+    				numerators[i] = -numerators[i];
+    			}
+    		}
+    		
+    		System.out.println(wholeNumbers[0] + ", " + wholeNumbers[1]);
+    		System.out.println(numerators[0] + ", " + numerators[1]);
+    		System.out.println(denominators[0] + ", " + denominators[1]);
+    		System.out.println(operator);
     		/*
     		System.out.println("whole: " + wholeNumbers[1]);
     		System.out.println("num: " + numerators[1]);
@@ -156,8 +163,8 @@ public class FracCalc {
     			int leastCommonMultiple = lcm(denominators[0], denominators[1]);
     			resultDenominator = leastCommonMultiple;
     			for (int i = 0; i <= 1; i++) {
-    			numerators[i] += (wholeNumbers[i] * denominators[i]); // multiply the whole number by the denom and add to numorator, creating an improper fraction
-    			numerators[i] *= (leastCommonMultiple / denominators[i]); // multiply the numorators by the amount of times it's denom goes into both denoms' lcm
+    				numerators[i] += (wholeNumbers[i] * denominators[i]); // multiply the whole number by the denom and add to numorator, creating an improper fraction
+    				numerators[i] *= (leastCommonMultiple / denominators[i]); // multiply the numorators by the amount of times it's denom goes into both denoms' lcm
     			System.out.println("num = " + numerators[i]);
     			}
     			resultNumorator = numerators[0] + numerators[1];
@@ -167,14 +174,40 @@ public class FracCalc {
     			int leastCommonMultiple = lcm(denominators[0], denominators[1]);
     			resultDenominator = leastCommonMultiple;
     			for (int i = 0; i <= 1; i++) {
-    			numerators[i] += (wholeNumbers[i] * denominators[i]); // multiply the whole number by the denom and add to numorator, creating an improper fraction
-    			numerators[i] *= (leastCommonMultiple / denominators[i]); // multiply the numorators by the amount of times it's denom goes into both denoms' lcm
+    				numerators[i] += (wholeNumbers[i] * denominators[i]); // multiply the whole number by the denom and add to numorator, creating an improper fraction
+    				numerators[i] *= (leastCommonMultiple / denominators[i]); // multiply the numorators by the amount of times it's denom goes into both denoms' lcm
     			System.out.println("num = " + numerators[i]);
     			}
     			resultNumorator = numerators[0] - numerators[1];
+    			
+    		} else if (operator == '*') {
+    			for (int i = 0; i <= 1; i++) {
+    				numerators[i] += (wholeNumbers[i] * denominators[i]); // multiply the whole number by the denom and add to numorator, creating an improper fraction
+    			}
+    			resultNumorator = numerators[0] * numerators[1];
+    			resultDenominator = denominators[0] * denominators[1];
+    		
+    		} else if (operator == '/') {
+    			for (int i = 0; i <= 1; i++) {
+    				numerators[i] += (wholeNumbers[i] * denominators[i]); // multiply the whole number by the denom and add to numorator, creating an improper fraction
+    			}
+    			// make the second fraction a reciprical
+    			int num = numerators[1];
+    			numerators[1] = denominators[1];
+    			denominators[1] = num;
+    			
+    			resultNumorator = numerators[0] * numerators[1];
+    			resultDenominator = denominators[0] * denominators[1];
+    			
     		}
     		
+    		// -3_3/4 - -2_2/4
+    		// -15/4 - -10/4
+    		// -5/4
     		
+    		// -3_3/4 + -2_2/4
+    		// -15/4 + -10/4
+    		// -25/4
     		
     		
     		
