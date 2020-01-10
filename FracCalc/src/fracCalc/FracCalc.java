@@ -201,125 +201,39 @@ public class FracCalc {
     			
     		}
     		
-    		// -3_3/4 - -2_2/4
-    		// -15/4 - -10/4
-    		// -5/4
     		
-    		// -3_3/4 + -2_2/4
-    		// -15/4 + -10/4
-    		// -25/4
+    		//NOW SIMPLIFY ANSWER
     		
+    		int wholeNumber = 0;
     		
-    		
-    		
-/*    		RE-DID CODE, THIS IS WAY TO CONFUSING
- * 
-    		if(cutInput.indexOf(' ') != -1) {
-    		numberInQuestion = cutInput.substring(0, cutInput.indexOf(' ') + 3); //make a small string with one mixed number including the operator after it
-   		} else {
-    			numberInQuestion = cutInput;
-    			cutInput = "";
-  		}
-    		
-    		// System.out.println("Number in question = " + numberInQuestion);
-    		
-    		String denom;
-    		String whole;
-    		String num;
-    		char operator = 'n';
-  
-    		if (numberInQuestion.indexOf('_') == -1 && numberInQuestion.indexOf('/') == -1) { // if test should be changed later, in order not to scan for a dividing operator
-    			whole = numberInQuestion.substring(0, numberInQuestion.length());
-    			num = "0";
-    			denom = "1"; // This excecutes if there is only a whole number, no fraction
-    			System.out.println("only whole number");
-    		} else if (numberInQuestion.indexOf('_') == -1 && !(numberInQuestion.indexOf('/') == -1)) { // this executes if there is only a fraction
-    			whole = "0";
-    			num = numberInQuestion.substring(0, numberInQuestion.indexOf('/'));
-    			denom = numberInQuestion.substring(numberInQuestion.indexOf('/') + 1, numberInQuestion.indexOf(' '));
-    			operator = numberInQuestion.charAt(numberInQuestion.length() - 2);
-    			System.out.println("only fraction");
-    			
-    			System.out.println(whole);
-    			System.out.println(num);
-    			System.out.println(denom);
-    			
-    			
-    		} else {
-    			whole = numberInQuestion.substring(0, numberInQuestion.indexOf('_'));
-    			num = numberInQuestion.substring(numberInQuestion.indexOf('_') + 1, numberInQuestion.indexOf('/'));
-        		if (numberInQuestion.indexOf(' ') != -1) {
-        			denom = numberInQuestion.substring(numberInQuestion.indexOf('/') + 1, numberInQuestion.indexOf(' '));
-        			cutInput = cutInput.substring(cutInput.indexOf(' ') + 3, cutInput.length());
-        			operator = numberInQuestion.charAt(numberInQuestion.length() - 2);
-        		} else {
-        			denom = numberInQuestion.substring(numberInQuestion.indexOf('/') + 1, numberInQuestion.length());
-        			operator = 'n';
-        		}
+    		if (Math.abs(resultNumorator) >= Math.abs(resultDenominator)) { 
+    			wholeNumber = resultNumorator / resultDenominator; // form a whole number
+    			resultNumorator = resultNumorator % resultDenominator; // make the fraction proper 
     		}
     		
-    		// now put all the gathered values into their respective arrays
-    		denominators[arrayPosition] = Integer.parseInt(denom);
-    		numerators[arrayPosition] = Integer.parseInt(num);
-    		wholeNumbers[arrayPosition] = Integer.parseInt(whole);
-    		operators[arrayPosition] = operator;
-
-    		arrayPosition++;
-    		
-    		System.out.println("whole = " + whole);
-    		System.out.println("num = " + num);
-    		System.out.println("denom = " + denom);
-    		System.out.println("operator = " + operator);
-
-    		System.out.println();
-    		System.out.println(Arrays.toString(wholeNumbers));
-    		System.out.println(Arrays.toString(numerators));
-    		System.out.println(Arrays.toString(denominators));
-    		System.out.println(Arrays.toString(operators));
-    		System.out.println("Remaining string = " + cutInput);
-    		System.out.println("num in question = " + numberInQuestion);
-    		System.out.println(numberInQuestion.charAt(numberInQuestion.length() - 1));
-    		System.out.println("=======================");
+    		int gcd = gcd(resultNumorator, resultDenominator);
+    		resultNumorator = resultNumorator / gcd;
+    		resultDenominator = resultDenominator / gcd; // simplify num and denom
     		
     		
-    		//CUT DOWN CUTINPUT
-    		if (numberInQuestion.indexOf(' ') != -1) {
-    			cutInput = cutInput.substring(numberInQuestion.length(), cutInput.length() - 1);
-    		} else {
-    			cutInput = "";
-    		}
-    		
-    	}
-    	//////////////////////////////////////////////////////////////
-    	
-    	
-    	System.out.println("whole:" + wholeNumbers[wholeNumbers.length - 1] + " numerator:" + numerators[wholeNumbers.length - 1] + " denominator:" + denominators[denominators.length - 1]);
-    	return "whole:" + wholeNumbers[wholeNumbers.length - 1] + " numerator:" + numerators[wholeNumbers.length - 1] + " denominator:" + denominators[denominators.length - 1];
-    	 
 
-       
-     public static int gcd(int a, int b) {
-       if (b == 0) {
-        	return a;
-       	}
-        return Math.abs(gcd(b, a%b));
-     } 
-
-    
  // TODO: Fill in the space below with any helper methods that you think you will need
-    
+    		if (wholeNumber == 0) {
+    			return resultNumorator + "/" + resultDenominator;
+    		} else {
+    			return wholeNumber + "_" + resultNumorator + "/" + resultDenominator;
+    		}
+	}
+	
+	
     public static int gcd(int a, int b) {
     	if (b == 0) {
     		return a;
     	}
     	return Math.abs(gcd(b, a%b));
     }
-     
-    	
-    */	
 
-		return resultNumorator + "/" + resultDenominator;
-	}
+
 	public static int lcm(int number1, int number2) {
 	    if (number1 == 0 || number2 == 0) {
 	        return 0;
