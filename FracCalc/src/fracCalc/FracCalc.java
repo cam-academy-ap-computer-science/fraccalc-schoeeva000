@@ -1,6 +1,12 @@
 /* 
- * 
- * CHECKPOINTS 1 & 2 are DONE
+  _   _  ____ _______ ______ 
+ | \ | |/ __ \__   __|  ____|
+ |  \| | |  | | | |  | |__   
+ | . ` | |  | | | |  |  __|  
+ | |\  | |__| | | |  | |____ 
+ |_| \_|\____/  |_|  |______| --> This is not the psudocode for the code below. 
+ 							  -- This was for when I wanted to do math on more than 2 numbers
+ 							  -- Comments below help to fill in understanding.  
  * 
  * 
  * PPSUDOCODE
@@ -62,25 +68,20 @@ public class FracCalc {
 
 	}
 
-	// ** IMPORTANT ** DO NOT DELETE THIS FUNCTION. This function will be used to
-	// test your code
-	// This function takes a String 'input' and produces the result
-	//
-	// input is a fraction string that needs to be evaluated. For your program, this
-	// will be the user input.
-	// e.g. input ==> "1/2 + 3/4"
-	//
-	// The function should return the result of the fraction after it has been
-	// calculated
-	// e.g. return ==> "1_1/4"
 	public static String produceAnswer(String input) { 
         // TODO: Implement this function to produce the solution to the input
     	
     	String cutInput = input;
-    	
+/*
+         _           _                                  _       _     _           
+        | |         | |                                (_)     | |   | |          
+      __| | ___  ___| | __ _ _ __ ___  __   ____ _ _ __ _  __ _| |__ | | ___  ___ 
+     / _` |/ _ \/ __| |/ _` | '__/ _ \ \ \ / / _` | '__| |/ _` | '_ \| |/ _ \/ __|
+    | (_| |  __/ (__| | (_| | | |  __/  \ V / (_| | |  | | (_| | |_) | |  __/\__ \
+     \__,_|\___|\___|_|\__,_|_|  \___|   \_/ \__,_|_|  |_|\__,_|_.__/|_|\___||___/
     	
     	///////////////////////////////////////////////////////////////
-    	
+*/
     	
     	int wholeNumbers[] = new int[2];
     	int numerators[] = new int[2];
@@ -90,13 +91,24 @@ public class FracCalc {
     	String numberInQuestion = "";
     	
     	//////////////////////////////////////////////////////////////
-    	
+/*
+ *                               _                          _       
+                                | |                        | |      
+  ___  ___ _ __   __ _ _ __ __ _| |_ ___   _ __   __ _ _ __| |_ ___ 
+ / __|/ _ \ '_ \ / _` | '__/ _` | __/ _ \ | '_ \ / _` | '__| __/ __|
+ \__ \  __/ |_) | (_| | | | (_| | ||  __/ | |_) | (_| | |  | |_\__ \
+ |___/\___| .__/ \__,_|_|  \__,_|\__\___| | .__/ \__,_|_|   \__|___/
+          | |                             | |                       
+          |_|                             |_|
+ */
     		
     		numberInQuestion = cutInput.substring(0, cutInput.indexOf(' ') + 3);
     		
+    		operator = numberInQuestion.charAt(numberInQuestion.indexOf(' ') + 1); // find the operator
+    		
     		
     		if (numberInQuestion.indexOf('_') == -1) {
-    			if (numberInQuestion.indexOf('/') != -1) {  // the number is a FRACTION, change later to account for dividing operators
+    			if ((numberInQuestion.substring(0, numberInQuestion.length() - 3).indexOf('/') != -1)) {  // the number is a FRACTION
     				numerators[0] = Integer.parseInt(numberInQuestion.substring(0, numberInQuestion.indexOf('/'))); // put the numerator into the array
     				denominators[0] = Integer.parseInt(numberInQuestion.substring(numberInQuestion.indexOf('/') + 1, numberInQuestion.indexOf(' '))); // find the denominator and put it into the array
     				wholeNumbers[0] = 0;
@@ -118,7 +130,7 @@ public class FracCalc {
     		
     		
     		if (numberInQuestion.indexOf('_') == -1) {
-    			if (numberInQuestion.indexOf('/') != -1) {  // the number is a FRACTION, change later to account for dividing operators
+    			if (numberInQuestion.indexOf('/') != -1) {  // the number is a FRACTION
     				numerators[1] = Integer.parseInt(numberInQuestion.substring(0, numberInQuestion.indexOf('/'))); // put the numerator into the array
     				denominators[1] = Integer.parseInt(numberInQuestion.substring(numberInQuestion.indexOf('/') + 1, numberInQuestion.length())); // find the denominator and put it into the array
     				wholeNumbers[1] = 0;
@@ -140,21 +152,16 @@ public class FracCalc {
     			}
     		}
     		
-    		System.out.println(wholeNumbers[0] + ", " + wholeNumbers[1]);
-    		System.out.println(numerators[0] + ", " + numerators[1]);
-    		System.out.println(denominators[0] + ", " + denominators[1]);
-    		System.out.println(operator);
-    		/*
-    		System.out.println("whole: " + wholeNumbers[1]);
-    		System.out.println("num: " + numerators[1]);
-    		System.out.println("denom: " + denominators[1]);
-    		System.out.println("operator: " + operator);
     		
-    		//5_3/4 + 6_5/8
-    		
-    		
-    		// NOW FOR CALCULATIONS
-    		*/
+/*
+            _            _       _       
+           | |          | |     | |      
+   ___ __ _| | ___ _   _| | __ _| |_ ___ 
+  / __/ _` | |/ __| | | | |/ _` | __/ _ \
+ | (_| (_| | | (__| |_| | | (_| | ||  __/
+  \___\__,_|_|\___|\__,_|_|\__,_|\__\___|
+ */
+ 
     		
     		int resultNumorator = 0;
     		int resultDenominator = 0;
@@ -202,7 +209,17 @@ public class FracCalc {
     		}
     		
     		
-    		//NOW SIMPLIFY ANSWER
+    		
+/*
+      _                 _ _  __       
+     (_)               | (_)/ _|      
+  ___ _ _ __ ___  _ __ | |_| |_ _   _ 
+ / __| | '_ ` _ \| '_ \| | |  _| | | |
+ \__ \ | | | | | | |_) | | | | | |_| |
+ |___/_|_| |_| |_| .__/|_|_|_|  \__, |
+                 | |             __/ |
+                 |_|            |___/ 
+ */
     		
     		int wholeNumber = 0;
     		
@@ -215,16 +232,66 @@ public class FracCalc {
     		resultNumorator = resultNumorator / gcd;
     		resultDenominator = resultDenominator / gcd; // simplify num and denom
     		
-    		
+    		System.out.println(wholeNumber);
+    		System.out.println(resultNumorator);
+    		System.out.println(resultDenominator);
 
- // TODO: Fill in the space below with any helper methods that you think you will need
-    		if (wholeNumber == 0) {
+
+/*
+                     _                  _      ___  _                       _                          _   _                
+                    | |                | |    / _ \( )                     | |                        | | (_)               
+ __      _____  _ __| | __   ___  _   _| |_  | | | |/ ___    __ _ _ __   __| |  _ __   ___  __ _  __ _| |_ ___   _____  ___ 
+ \ \ /\ / / _ \| '__| |/ /  / _ \| | | | __| | | | | / __|  / _` | '_ \ / _` | | '_ \ / _ \/ _` |/ _` | __| \ \ / / _ \/ __|
+  \ V  V / (_) | |  |   <  | (_) | |_| | |_  | |_| | \__ \ | (_| | | | | (_| | | | | |  __/ (_| | (_| | |_| |\ V /  __/\__ \
+   \_/\_/ \___/|_|  |_|\_\  \___/ \__,_|\__|  \___/  |___/  \__,_|_| |_|\__,_| |_| |_|\___|\__, |\__,_|\__|_| \_/ \___||___/
+                                                                                            __/ |                           
+                                                                                           |___/                            
+ */
+    		
+    		
+    		if ((resultNumorator < 0 && resultDenominator < 0)) { // if both num and denom are negative, the number is positive
+    			resultNumorator = Math.abs(resultNumorator);
+    			resultDenominator = Math.abs(resultDenominator);
+    			wholeNumber = Math.abs(wholeNumber);
+    			System.out.println("ran 1st if");
+    		} else if (resultNumorator < 0 && wholeNumber < 0) { // only the whole number needs to be negative
+    			resultNumorator = Math.abs(resultNumorator);
+    		} else if (resultDenominator < 0 && resultNumorator > 0) { // if only denom is negative...
+    			resultDenominator = Math.abs(resultDenominator); // make it positive
+    			if (wholeNumber != 0) { // and than make the whole number negative
+    				if (wholeNumber > 0) {
+    					wholeNumber = 0 - wholeNumber;
+    				}
+    			} else {
+    				resultNumorator = 0 - resultNumorator; // or else make the numorator negative
+    			}
+    			System.out.println("ran 2nd if");
+    			
+    		}
+    		
+    		if (wholeNumber == 0 && resultNumorator == 0) { // if fraction and whole are zero, the answer is 0
+    			return "0";
+    		} else if (wholeNumber == 0) { // if no whole number, than just a fraction
     			return resultNumorator + "/" + resultDenominator;
-    		} else {
+    		} else if (resultNumorator == 0) { // if no fraction, only a whole number
+    			return Integer.toString(wholeNumber);
+    		} else { // if none of that, it's a mixed number
     			return wholeNumber + "_" + resultNumorator + "/" + resultDenominator;
     		}
 	}
+/*    	        _           _                                 _   _               _     
+               | |    _    | |                               | | | |             | |    
+   __ _  ___ __| |  _| |_  | | ___ _ __ ___    _ __ ___   ___| |_| |__   ___   __| |___ 
+  / _` |/ __/ _` | |_   _| | |/ __| '_ ` _ \  | '_ ` _ \ / _ \ __| '_ \ / _ \ / _` / __|
+ | (_| | (_| (_| |   |_|   | | (__| | | | | | | | | | | |  __/ |_| | | | (_) | (_| \__ \
+  \__, |\___\__,_|         |_|\___|_| |_| |_| |_| |_| |_|\___|\__|_| |_|\___/ \__,_|___/
+   __/ |                                                                                
+  |___/
+*/
 	
+	
+	
+ // don't know exactly how these work, but they do!
 	
     public static int gcd(int a, int b) {
     	if (b == 0) {
